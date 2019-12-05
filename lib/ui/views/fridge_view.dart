@@ -9,8 +9,13 @@ class _FridgeViewState extends State<FridgeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Lets Start'),
+      body: StreamBuilder<bool>(
+        stream: null,
+        builder: (context, snapshot) {
+          return Center(
+            child: Text('Lets Start'),
+          );
+        }
       ),
     );
   }
