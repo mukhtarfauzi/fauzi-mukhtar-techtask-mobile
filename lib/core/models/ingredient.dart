@@ -7,8 +7,10 @@ class Ingredient {
   String title;
   @JsonKey(name: 'use-by')
   DateTime usedBy;
+  @JsonKey(ignore: true)
+  bool picked;
 
-  Ingredient({this.title, this.usedBy});
+  Ingredient({this.title, this.usedBy, this.picked : false});
 
   factory Ingredient.fromJson(Map<String, dynamic> json) =>
       _$IngredientFromJson(json);

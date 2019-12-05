@@ -4,7 +4,7 @@ import 'package:rxdart/rxdart.dart';
 class BaseModel extends ChangeNotifier{
   final _isLoadingSubject = BehaviorSubject<bool>.seeded(false);
 
-  Observable<bool> get loadingStatus => _isLoadingSubject.stream;
+  Observable<bool> get isLoading => _isLoadingSubject.stream;
 
   void setBusy(){
     _isLoadingSubject.sink.add(true);

@@ -6,7 +6,7 @@ import 'package:tech_task/core/view_models/base_model.dart';
 
 class RecipeSuggestionModel extends BaseModel {
 
-  List<String> ingredientsPicked;
+  List<String> ingredientsPicked = [];
 
   List<Ingredient> _ingredients = [];
 
@@ -41,9 +41,20 @@ class RecipeSuggestionModel extends BaseModel {
     setBusy();
     //TODO must use api to get ingredients
     //For now i use mock data
+    await Future.delayed(Duration(milliseconds: 500));
     ingredients = ingredientsData.map((ing) => Ingredient.fromJson(ing)).toList();
     _descendingUseBy();
 
     setIdle();
+  }
+
+  void ingredientTogglePicked(int index){
+    ingredients[index].picked = !ingredients[index].picked;
+    if(ingredients[index].picked){
+      ingredientsPicked.add(ingredients[index].title);
+    }else{
+      ingredientsPicked.remove(ingredients[index].title);
+    }
+    notifyListeners();
   }
 }
