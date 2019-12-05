@@ -10,6 +10,8 @@ class Ingredient {
   @JsonKey(ignore: true)
   bool picked;
 
+  String get usedByString => usedBy.toString().substring(0, 10);
+
   Ingredient({this.title, this.usedBy, this.picked : false});
 
   factory Ingredient.fromJson(Map<String, dynamic> json) =>

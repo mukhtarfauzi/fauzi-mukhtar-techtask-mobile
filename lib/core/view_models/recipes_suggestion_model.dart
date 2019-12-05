@@ -18,17 +18,26 @@ class RecipeSuggestionModel extends BaseModel {
     notifyListeners();
   }
 
-  DateTime lunchDate = DateTime.now();
+  DateTime _lunchDate = DateTime.now();
+
+  void setLunchDate(DateTime value) async {
+    final preference = await PreferenceService.getInstance();
+    _lunchDate = value;
+    preference.date = getLunchDate;
+    notifyListeners();
+  }
+
+  String get getLunchDate => _lunchDate.toString().substring(0, 10);
 
   final _apiService = ApiService();
 
   Future<void> checkPreferenceDate() async {
     final preference = await PreferenceService.getInstance();
     if(preference.date == null){
-      lunchDate = DateTime.now();
-      preference.date = lunchDate.toString().trim();
+      _lunchDate = DateTime.now();
+      preference.date = getLunchDate;
     }else{
-      lunchDate = DateTime.parse(preference.date);
+      _lunchDate = DateTime.parse(preference.date);
     }
     notifyListeners();
   }

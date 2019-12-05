@@ -10,8 +10,14 @@ class FridgeView extends StatefulWidget {
 class _FridgeViewState extends State<FridgeView> {
   @override
   void initState() {
+    Provider.of<RecipeSuggestionModel>(context, listen: false).checkPreferenceDate();
     Provider.of<RecipeSuggestionModel>(context, listen: false).getIngredients();
     super.initState();
+  }
+
+  void _showLunchDatePicker(BuildContext context, RecipeSuggestionModel model) async {
+    var datePicked = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2018), lastDate: DateTime(2020));
+    model.setLunchDate(datePicked);
   }
 
   @override
@@ -29,13 +35,18 @@ class _FridgeViewState extends State<FridgeView> {
         child: Container(
           color: Colors.redAccent,
           child: SafeArea(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  DateTime.now().toIso8601String(),
-                  style: TextStyle(color: Colors.black),
-                ),
-              ],
+            child: Consumer<RecipeSuggestionModel>(
+              builder: (__, model, _) => Row(
+                children: <Widget>[
+                  Text(model.getLunchDate,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.settings),
+                    onPressed: () => _showLunchDatePicker(context, model),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -51,9 +62,7 @@ class _FridgeViewState extends State<FridgeView> {
                         itemCount: model.ingredients.length,
                         itemBuilder: (context, index) => ListTile(
                               title: Text(model.ingredients[index].title),
-                              subtitle: Text(model.ingredients[index].usedBy
-                                  .toString()
-                                  .trim()),
+                              subtitle: Text(model.ingredients[index].usedByString),
                               trailing: model.ingredients[index].picked?Icon(Icons.check_circle, color: Theme.of(context).primaryColor,):null,
                               onTap: () => model.ingredientTogglePicked(index),
                             )),
