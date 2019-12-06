@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_task/core/view_models/recipes_suggestion_model.dart';
-import 'package:tech_task/ui/shared/fonts.dart';
 
 class FridgeView extends StatefulWidget {
   @override
@@ -35,7 +34,7 @@ class _FridgeViewState extends State<FridgeView> {
         label: Text('Get Recipe'),
         icon: Icon(Icons.send),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(90),
         child: SafeArea(
@@ -103,17 +102,18 @@ class _FridgeViewState extends State<FridgeView> {
                 if (snapshot.data == false) {
                   return Consumer<RecipeSuggestionModel>(
                     builder: (context, model, _) => ListView.builder(
-                      itemCount: model.ingredients.length,
+                      itemCount: model.ingredientsList.length,
                       itemBuilder: (context, index) => ListTile(
-                        title: Text(model.ingredients[index].title),
-                        subtitle: Text(model.ingredients[index].usedByString),
-                        trailing: model.ingredients[index].picked
+                        enabled: model.isGoodIngredient(index),
+                        title: Text(model.ingredientsList[index].title),
+                        subtitle: Text('Use By: ${model.ingredientsList[index].usedByString}'),
+                        trailing: model.ingredientsList[index].picked
                             ? Icon(
                                 Icons.check_circle,
                                 color: Theme.of(context).primaryColor,
                               )
                             : null,
-                        onTap: () => model.ingredientTogglePicked(model.ingredients[index].title),
+                        onTap: () => model.ingredientTogglePicked(model.ingredientsList[index].title),
                       ),
                     ),
                   );

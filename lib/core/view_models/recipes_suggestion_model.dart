@@ -8,13 +8,13 @@ class RecipeSuggestionModel extends BaseModel {
 
   List<String> ingredientsPicked = [];
 
-  List<Ingredient> _ingredients = [];
+  List<Ingredient> _ingredientsList = [];
 
-  List<Ingredient> get ingredients => _ingredients;
+  List<Ingredient> get ingredientsList => _ingredientsList;
 
-  set ingredients(List<Ingredient> value) {
-    _ingredients.clear();
-    _ingredients.addAll(value);
+  set ingredientsList(List<Ingredient> value) {
+    _ingredientsList.clear();
+    _ingredientsList.addAll(value);
     notifyListeners();
   }
 
@@ -31,6 +31,10 @@ class RecipeSuggestionModel extends BaseModel {
 
   final _apiService = ApiService();
 
+  void _descendingUseBy(){
+    ingredientsList.sort((a, b) => b.usedBy.compareTo(a.usedBy));
+  }
+
   Future<void> checkPreferenceDate() async {
     final preference = await PreferenceService.getInstance();
     if(preference.date == null){
@@ -42,16 +46,12 @@ class RecipeSuggestionModel extends BaseModel {
     notifyListeners();
   }
 
-  void _descendingUseBy(){
-    ingredients.sort((a, b) => b.usedBy.compareTo(a.usedBy));
-  }
-
   Future<void> getIngredients() async {
     setBusy();
     //TODO must use api to get ingredients
     //For now i use mock data
     await Future.delayed(Duration(milliseconds: 500));
-    ingredients = ingredientsData.map((ing) => Ingredient.fromJson(ing)).toList();
+    ingredientsList = ingredientsData.map((ing) => Ingredient.fromJson(ing)).toList();
     _descendingUseBy();
 
     setIdle();
@@ -59,7 +59,7 @@ class RecipeSuggestionModel extends BaseModel {
 
   void ingredientTogglePicked(String title){
     bool isPicked;
-    ingredients.forEach((ing){
+    ingredientsList.forEach((ing){
       if(ing.title == title){
         ing.picked = !ing.picked;
         isPicked = ing.picked;
@@ -72,4 +72,14 @@ class RecipeSuggestionModel extends BaseModel {
     }
     notifyListeners();
   }
+
+  bool isGoodIngredient(int index){
+    var status = ingredientsList[index].usedBy.compareTo(_lunchDate);
+    if(status.isNegative){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
 }

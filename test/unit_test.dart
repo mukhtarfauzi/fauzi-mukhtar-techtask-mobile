@@ -27,8 +27,8 @@ void main(){
 
     test("Get Ingredients", () async {
       await recipesSuggestModel.getIngredients();
-      print("Ingredient: ${recipesSuggestModel.ingredients.first.usedBy}");
-      expect(recipesSuggestModel.ingredients.length, 6);
+      print("Ingredient: ${recipesSuggestModel.ingredientsList.first.usedBy}");
+      expect(recipesSuggestModel.ingredientsList.length, 6);
 
     });
   });
