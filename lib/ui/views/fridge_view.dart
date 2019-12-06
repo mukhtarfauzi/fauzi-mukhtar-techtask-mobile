@@ -93,7 +93,7 @@ class _IngredientsPicked extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Your ingredients picked: '),
+                    Text('Picked Ingredients: '),
                     if (model.ingredientsPicked.isNotEmpty)
                       Wrap(
                         crossAxisAlignment: WrapCrossAlignment.center,
