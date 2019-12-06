@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_task/core/view_models/recipes_suggestion_model.dart';
+import 'package:tech_task/ui/shared/utils.dart';
 import 'package:tech_task/ui/widgets/fridge_app_bar.dart';
 import 'package:tech_task/ui/widgets/get_recipe_button.dart';
 
@@ -50,21 +51,24 @@ class _IngredientsList extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          return ListView.builder(
-            itemCount: model.ingredientsList.length,
-            itemBuilder: (context, index) => ListTile(
-              enabled: model.isGoodIngredient(index),
-              title: Text(model.ingredientsList[index].title),
-              subtitle:
-                  Text('Use By: ${model.ingredientsList[index].usedByString}'),
-              trailing: model.ingredientsList[index].picked
-                  ? Icon(
-                      Icons.check_circle,
-                      color: Theme.of(context).primaryColor,
-                    )
-                  : null,
-              onTap: () => model
-                  .ingredientTogglePicked(model.ingredientsList[index].title),
+          return Padding(
+            padding: EdgeInsets.only(bottom: screenHeight(context, dividedBy: 5)),
+            child: ListView.builder(
+              itemCount: model.ingredientsList.length,
+              itemBuilder: (context, index) => ListTile(
+                enabled: model.isGoodIngredient(index),
+                title: Text(model.ingredientsList[index].title),
+                subtitle:
+                    Text('Use By: ${model.ingredientsList[index].usedByString}'),
+                trailing: model.ingredientsList[index].picked
+                    ? Icon(
+                        Icons.check_circle,
+                        color: Theme.of(context).primaryColor,
+                      )
+                    : null,
+                onTap: () => model
+                    .ingredientTogglePicked(model.ingredientsList[index].title),
+              ),
             ),
           );
         },
