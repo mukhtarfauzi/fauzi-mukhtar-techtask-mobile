@@ -41,34 +41,35 @@ class _IngredientsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<bool>(
-        stream: Provider.of<RecipeSuggestionModel>(context).isLoading,
+    return Consumer<RecipeSuggestionModel>(
+      builder: (context, model, _) => StreamBuilder<bool>(
+        stream: model.isLoading,
         builder: (context, snapshot) {
-          if (snapshot.data == false) {
-            return Consumer<RecipeSuggestionModel>(
-              builder: (context, model, _) => ListView.builder(
-                itemCount: model.ingredientsList.length,
-                itemBuilder: (context, index) => ListTile(
-                  enabled: model.isGoodIngredient(index),
-                  title: Text(model.ingredientsList[index].title),
-                  subtitle: Text(
-                      'Use By: ${model.ingredientsList[index].usedByString}'),
-                  trailing: model.ingredientsList[index].picked
-                      ? Icon(
-                          Icons.check_circle,
-                          color: Theme.of(context).primaryColor,
-                        )
-                      : null,
-                  onTap: () => model.ingredientTogglePicked(
-                      model.ingredientsList[index].title),
-                ),
-              ),
+          if (snapshot.data == true) {
+            return Center(
+              child: CircularProgressIndicator(),
             );
           }
-          return Center(
-            child: CircularProgressIndicator(),
+          return ListView.builder(
+            itemCount: model.ingredientsList.length,
+            itemBuilder: (context, index) => ListTile(
+              enabled: model.isGoodIngredient(index),
+              title: Text(model.ingredientsList[index].title),
+              subtitle:
+                  Text('Use By: ${model.ingredientsList[index].usedByString}'),
+              trailing: model.ingredientsList[index].picked
+                  ? Icon(
+                      Icons.check_circle,
+                      color: Theme.of(context).primaryColor,
+                    )
+                  : null,
+              onTap: () => model
+                  .ingredientTogglePicked(model.ingredientsList[index].title),
+            ),
           );
-        });
+        },
+      ),
+    );
   }
 }
 

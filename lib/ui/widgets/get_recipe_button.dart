@@ -12,10 +12,22 @@ class GetRecipeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<RecipeSuggestionModel>(
       builder: (context, model, _) => FloatingActionButton.extended(
-        onPressed: model.ingredientsPicked.isEmpty?null:()=> Navigator.pushNamed(context, Router.recipe),
-        backgroundColor: model.ingredientsPicked.isEmpty?Theme.of(context).disabledColor:Theme.of(context).accentColor,
-        label: Text('Get Recipe', style: TextStyle(color: model.ingredientsPicked.isEmpty?Colors.white:Colors.black,),),
-        icon: Icon(Icons.send, color: model.ingredientsPicked.isEmpty?Colors.white:Colors.black),
+        onPressed: model.ingredientsPicked.isEmpty
+            ? null
+            : () => Navigator.pushNamed(context, Router.recipe),
+        backgroundColor: model.ingredientsPicked.isEmpty
+            ? Theme.of(context).disabledColor
+            : Theme.of(context).accentColor,
+        label: Text(
+          'Get Recipe',
+          style: TextStyle(
+            color:
+                model.ingredientsPicked.isEmpty ? Colors.white : Colors.black,
+          ),
+        ),
+        icon: Icon(Icons.send,
+            color:
+                model.ingredientsPicked.isEmpty ? Colors.white : Colors.black),
       ),
     );
   }

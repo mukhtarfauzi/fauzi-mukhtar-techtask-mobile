@@ -1,1 +1,0 @@
-const titleFontSize = 28;

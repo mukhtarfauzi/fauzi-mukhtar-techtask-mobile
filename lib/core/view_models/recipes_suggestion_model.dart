@@ -1,5 +1,6 @@
 import 'package:tech_task/core/constant/mock_data.dart';
 import 'package:tech_task/core/models/ingredient.dart';
+import 'package:tech_task/core/models/recipe.dart';
 import 'package:tech_task/core/services/api_service.dart';
 import 'package:tech_task/core/services/preference_service.dart';
 import 'package:tech_task/core/view_models/base_model.dart';
@@ -7,6 +8,8 @@ import 'package:tech_task/core/view_models/base_model.dart';
 class RecipeSuggestionModel extends BaseModel {
 
   List<String> ingredientsPicked = [];
+
+  List<Recipe> recipeList = [];
 
   List<Ingredient> _ingredientsList = [];
 
@@ -50,10 +53,21 @@ class RecipeSuggestionModel extends BaseModel {
     setBusy();
     //TODO must use api to get ingredients
     //For now i use mock data
+    //ingredientsList = await _apiService.fetchIngredients();
     await Future.delayed(Duration(milliseconds: 500));
     ingredientsList = ingredientsData.map((ing) => Ingredient.fromJson(ing)).toList();
     _descendingUseBy();
 
+    setIdle();
+  }
+
+  Future<void> getRecipe() async{
+    setBusy();
+    //TODO must use api to get ingredients
+    //For now i use mock data
+    //recipeList = await _apiService.fetchRecipes(ingredientsPicked);
+    await Future.delayed(Duration(milliseconds: 500));
+    recipeList = recipeData.map((recipe) => Recipe.fromJson(recipe)).toList();
     setIdle();
   }
 

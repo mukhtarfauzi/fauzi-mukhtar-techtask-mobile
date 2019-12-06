@@ -65,7 +65,7 @@ const ingredientsData = [
   }
 ];
 
-const recipeDate = [
+const recipeData = [
   {
     "title": "Ham and Cheese Toastie",
     "ingredients": [
