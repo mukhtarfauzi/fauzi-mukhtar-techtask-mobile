@@ -16,7 +16,7 @@ class GetRecipeButton extends StatelessWidget {
             ? null
             : () => Navigator.pushNamed(context, Router.recipe),
         backgroundColor: model.ingredientsPicked.isEmpty
-            ? Theme.of(context).disabledColor
+            ? Theme.of(context).dividerColor
             : Theme.of(context).accentColor,
         label: Text(
           'Get Recipe',
