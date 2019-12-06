@@ -26,3 +26,28 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: NotoSansKr
+      fonts:
+        - asset: assets/fonts/noto_sans_kr/NotoSansKR-Regular.otf
+        - asset: assets/fonts/noto_sans_kr/NotoSansKR-Thin.otf
+          weight: 100
+        - asset: assets/fonts/noto_sans_kr/NotoSansKR-Light.otf
+          weight: 300
+        - asset: assets/fonts/noto_sans_kr/NotoSansKR-Medium.otf
+          weight: 500
+        - asset: assets/fonts/noto_sans_kr/NotoSansKR-Bold.otf
+          weight: 700
+        - asset: assets/fonts/noto_sans_kr/NotoSansKR-Black.otf
+          weight: 900
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/quicksand/Quicksand-Regular.ttf
+        - asset: assets/fonts/quicksand/Quicksand-Light.ttf
+          weight: 300
+        - asset: assets/fonts/quicksand/Quicksand-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/quicksand/Quicksand-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/quicksand/Quicksand-Bold.ttf
+          weight: 700

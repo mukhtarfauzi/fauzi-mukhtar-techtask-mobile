@@ -1,26 +1,97 @@
 const ingredientsData = [
   {
-    "title" : "Meat",
-    "use-by": "2020-11-12"
+    "title": "Ham",
+    "use-by": "2019-11-25"
   },
   {
-    "title" : "Egg",
-    "use-by": "2019-11-12"
+    "title": "Cheese",
+    "use-by": "2019-11-08"
   },
   {
-    "title" : "Milk",
-    "use-by": "2019-01-12"
+    "title": "Bread",
+    "use-by": "2019-11-01"
   },
   {
-    "title" : "Ketchup",
-    "use-by": "2019-12-12"
+    "title": "Butter",
+    "use-by": "2019-11-25"
   },
   {
-    "title" : "Ham",
-    "use-by": "2013-12-12"
+    "title": "Bacon",
+    "use-by": "2019-11-02"
   },
   {
-    "title" : "Cheese",
-    "use-by": "2019-12-12"
+    "title": "Eggs",
+    "use-by": "2019-11-25"
   },
+  {
+    "title": "Mushrooms",
+    "use-by": "2019-11-11"
+  },
+  {
+    "title": "Sausage",
+    "use-by": "2019-11-25"
+  },
+  {
+    "title": "Hotdog Bun",
+    "use-by": "2019-11-25"
+  },
+  {
+    "title": "Ketchup",
+    "use-by": "2019-11-11"
+  },
+  {
+    "title": "Mustard",
+    "use-by": "2019-11-10"
+  },
+  {
+    "title": "Lettuce",
+    "use-by": "2019-11-10"
+  },
+  {
+    "title": "Tomato",
+    "use-by": "2019-11-05"
+  },
+  {
+    "title": "Cucumber",
+    "use-by": "2019-11-05"
+  },
+  {
+    "title": "Beetroot",
+    "use-by": "2019-11-06"
+  },
+  {
+    "title": "Salad Dressing",
+    "use-by": "2019-11-06"
+  }
+];
+
+const recipeDate = [
+  {
+    "title": "Ham and Cheese Toastie",
+    "ingredients": [
+      "Ham",
+      "Cheese",
+      "Bread",
+      "Butter"
+    ]
+  },
+  {
+    "title": "Salad",
+    "ingredients": [
+      "Lettuce",
+      "Tomato",
+      "Cucumber",
+      "Beetroot",
+      "Salad Dressing"
+    ]
+  },
+  {
+    "title": "Hotdog",
+    "ingredients": [
+      "Hotdog Bun",
+      "Sausage",
+      "Ketchup",
+      "Mustard"
+    ]
+  }
 ];
