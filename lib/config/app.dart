@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tech_task/config/router.dart';
 import 'package:tech_task/core/view_models/recipes_suggestion_model.dart';
 import 'package:tech_task/ui/shared/colors.dart';
 import 'package:tech_task/ui/shared/fonts.dart';
-import 'package:tech_task/ui/views/fridge_view.dart';
 
 class App extends StatelessWidget {
   @override
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
 
           )
         ),
-        home: FridgeView(),
+        onGenerateRoute: Router.generateRoute,
       ),
     );
   }
