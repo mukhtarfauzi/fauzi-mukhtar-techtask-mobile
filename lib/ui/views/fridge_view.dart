@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_task/core/view_models/recipes_suggestion_model.dart';
 import 'package:tech_task/ui/widgets/fridge_app_bar.dart';
+import 'package:tech_task/ui/widgets/get_recipe_button.dart';
 
 class FridgeView extends StatefulWidget {
   @override
@@ -20,18 +21,14 @@ class _FridgeViewState extends State<FridgeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: Text('Get Recipe'),
-        icon: Icon(Icons.send),
-      ),
+      floatingActionButton: GetRecipeButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      appBar: FridgeAppBar(),
+      appBar: FridgeAppBar(
+        title: 'My Lunch Suggestion',
+        subtitle: 'Ingredients: ',
+      ),
       body: Stack(
-        children: <Widget>[
-          _IngredientsList(),
-          _IngredientsPicked()
-        ],
+        children: <Widget>[_IngredientsList(), _IngredientsPicked()],
       ),
     );
   }
@@ -54,14 +51,16 @@ class _IngredientsList extends StatelessWidget {
                 itemBuilder: (context, index) => ListTile(
                   enabled: model.isGoodIngredient(index),
                   title: Text(model.ingredientsList[index].title),
-                  subtitle: Text('Use By: ${model.ingredientsList[index].usedByString}'),
+                  subtitle: Text(
+                      'Use By: ${model.ingredientsList[index].usedByString}'),
                   trailing: model.ingredientsList[index].picked
                       ? Icon(
                           Icons.check_circle,
                           color: Theme.of(context).primaryColor,
                         )
                       : null,
-                  onTap: () => model.ingredientTogglePicked(model.ingredientsList[index].title),
+                  onTap: () => model.ingredientTogglePicked(
+                      model.ingredientsList[index].title),
                 ),
               ),
             );
@@ -106,7 +105,10 @@ class _IngredientsPicked extends StatelessWidget {
                                 backgroundColor: Colors.grey.shade800,
                                 child: Icon(Icons.close),
                               ),
-                              label: Text(picked), onPressed: () => model.ingredientTogglePicked(picked),)
+                              label: Text(picked),
+                              onPressed: () =>
+                                  model.ingredientTogglePicked(picked),
+                            )
                         ],
                       ),
                   ],
