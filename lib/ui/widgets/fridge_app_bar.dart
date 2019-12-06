@@ -17,10 +17,10 @@ class FridgeAppBar extends StatelessWidget implements PreferredSizeWidget {
       BuildContext context, RecipeSuggestionModel model) async {
     var datePicked = await showDatePicker(
         context: context,
-        initialDate: DateTime.now(),
+        initialDate: model.lunchDate,
         firstDate: DateTime(2018),
         lastDate: DateTime(2020));
-    model.setLunchDate(datePicked);
+    if(datePicked != null)model.setLunchDate(datePicked);
   }
 
   @override
