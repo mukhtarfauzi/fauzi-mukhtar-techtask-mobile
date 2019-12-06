@@ -57,12 +57,18 @@ class RecipeSuggestionModel extends BaseModel {
     setIdle();
   }
 
-  void ingredientTogglePicked(int index){
-    ingredients[index].picked = !ingredients[index].picked;
-    if(ingredients[index].picked){
-      ingredientsPicked.add(ingredients[index].title);
+  void ingredientTogglePicked(String title){
+    bool isPicked;
+    ingredients.forEach((ing){
+      if(ing.title == title){
+        ing.picked = !ing.picked;
+        isPicked = ing.picked;
+      }
+    });
+    if(isPicked){
+      ingredientsPicked.add(title);
     }else{
-      ingredientsPicked.remove(ingredients[index].title);
+      ingredientsPicked.remove(title);
     }
     notifyListeners();
   }
