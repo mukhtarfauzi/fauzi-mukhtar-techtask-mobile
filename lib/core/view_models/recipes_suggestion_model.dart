@@ -23,10 +23,20 @@ class RecipeSuggestionModel extends BaseModel {
 
   DateTime _lunchDate = DateTime.now();
 
+  DateTime get lunchDate => _lunchDate;
+
   void setLunchDate(DateTime value) async {
     final preference = await PreferenceService.getInstance();
     _lunchDate = value;
     preference.date = getLunchDate;
+
+    ingredientsList.forEach((ing){
+      var dateCompare = ing.usedBy.compareTo(_lunchDate);
+      if(dateCompare.isNegative){
+        ing.picked = false;
+        ingredientsPicked.remove(ing.title);
+      }
+    });
     notifyListeners();
   }
 
